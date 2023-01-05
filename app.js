@@ -684,7 +684,7 @@ export class App {
       </div>
     
     `;
-    if (typeof workout.pace != "undefined" && workout.pace != "")
+    if (typeof workout.pace != "undefined" && workout.speed != "")
       html += `
         <div class="workout__details workout__details--${workout.type}">
           <span class="workout__icon">⚡️</span>
