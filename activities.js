@@ -30,7 +30,8 @@ export class Activity {
   }
 
   _calcPace() {
-    this.pace = this.duration / this.distance;
+    if (this.duration || this.distance === 0) this.pace = 0;
+    else this.pace = this.duration / this.distance;
     return this.pace;
   }
 }
