@@ -316,21 +316,38 @@ export class App {
   }
 
   _newWorkout(e) {
+    // Check valid inputs
+    const validInputs = (...inputs) =>
+      inputs.every((inp) => Number.isFinite(inp));
+
+    const allPositive = (...inputs) => {
+      inputs.every((inp) => {
+        console.log(inp);
+        inp >= 0;
+      });
+    };
     e.preventDefault();
-    // Get data from form
+
     let type = this._activityType.value;
     const distance = +this._activityDistance.value;
     const duration = +this._activityDuration.value;
     const heartRate = +this._activityHr.value;
     const { lat, lng } = this.#mapEvent.latlng;
-    let workout, steps, elevation, strokeRate, speedKnots, speed, inputType;
+
+    let workout, steps, elevation, strokeRate, speedKnots, speed;
 
     switch (type) {
       case "walk":
         steps = +this._activitySteps.value;
         speed = +this._activitySpeed.value;
         elevation = +this._activityElevation.value;
-        console.log(heartRate);
+        if (
+          !validInputs(distance, duration, heartRate, steps, speed, elevation)
+          // !allPositive(distance, duration, heartRate, steps, speed)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
+
         workout = new Walk(
           [lat, lng],
           distance,
@@ -345,6 +362,13 @@ export class App {
         steps = +this._activitySteps.value;
         speed = +this._activitySpeed.value;
         elevation = +this._activityElevation.value;
+
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Run(
           [lat, lng],
           distance,
@@ -358,6 +382,12 @@ export class App {
       case "cycle":
         elevation = +this._activityElevation.value;
         speed = +this._activitySpeed.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Cycle(
           [lat, lng],
           distance,
@@ -369,11 +399,25 @@ export class App {
         break;
       case "swim":
         speed = +this._activitySpeed.value;
+
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Swim([lat, lng], distance, duration, heartRate, speed);
         break;
       case "kayak":
         strokeRate = +this._activityStrokeRate.value;
         speed = +this._activitySpeed.value;
+
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Kayak(
           [lat, lng],
           distance,
@@ -386,6 +430,12 @@ export class App {
       case "row":
         strokeRate = +this._activityStrokeRate.value;
         speed = +this._activitySpeed.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Row(
           [lat, lng],
           distance,
@@ -397,14 +447,32 @@ export class App {
         break;
       case "ski":
         speed = +this._activitySpeed.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Ski([lat, lng], distance, duration, heartRate, speed);
         break;
       case "skate":
         speed = +this._activitySpeed.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Skate([lat, lng], distance, duration, heartRate, speed);
         break;
       case "football":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Football(
           [lat, lng],
           distance,
@@ -415,18 +483,42 @@ export class App {
         break;
       case "gym":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Gym([lat, lng], distance, duration, heartRate, steps);
         break;
       case "rugby":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Rugby([lat, lng], distance, duration, heartRate, steps);
         break;
       case "tennis":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Tennis([lat, lng], distance, duration, heartRate, steps);
         break;
       case "basketball":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Basketball(
           [lat, lng],
           distance,
@@ -437,18 +529,42 @@ export class App {
         break;
       case "boxing":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Boxing([lat, lng], distance, duration, heartRate, steps);
         break;
       case "hockey":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Hockey([lat, lng], distance, duration, heartRate, steps);
         break;
       case "golf":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Golf([lat, lng], distance, duration, heartRate, steps);
         break;
       case "waterpolo":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Waterpolo(
           [lat, lng],
           distance,
@@ -459,10 +575,22 @@ export class App {
         break;
       case "cricket":
         steps = +this._activitySteps.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Cricket([lat, lng], distance, duration, heartRate, steps);
         break;
       case "sailing":
         speedKnots = +this._activitySpeedKnots.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Sailing(
           [lat, lng],
           distance,
@@ -476,6 +604,12 @@ export class App {
         elevation = +this._activityElevation.value;
         strokeRate = +this._activityStrokeRate.value;
         speedKnots = +this._activitySpeedKnots.value;
+        if (
+          !validInputs(distance, duration, heartRate)
+          // !allPositive(distance, duration, heartRate)
+        ) {
+          return alert("Inputs must be positive numbers");
+        }
         workout = new Other(
           [lat, lng],
           distance,
@@ -541,7 +675,10 @@ export class App {
         <span class="workout__unit">bpm</span>
       </div>
     `;
-    if (typeof workout.speed != "undefined" && workout.speed != "")
+    if (
+      (typeof workout.speed != "undefined" && workout.speed != "") ||
+      !isNaN(workout.speed)
+    )
       html += `
       <div class="workout__details workout__details--${workout.type}">
         <span class="workout__icon">⚡️</span>
