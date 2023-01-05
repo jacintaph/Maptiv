@@ -30,8 +30,9 @@ export class Activity {
   }
 
   _calcPace() {
-    if (this.duration || this.distance === 0) this.pace = 0;
+    if (this.duration || this.distance <= 0) this.pace = 0;
     else this.pace = this.duration / this.distance;
+    console.log(this.pace.toFixed(2));
     return this.pace;
   }
 }

@@ -675,10 +675,7 @@ export class App {
         <span class="workout__unit">bpm</span>
       </div>
     `;
-    if (
-      (typeof workout.speed != "undefined" && workout.speed != "") ||
-      !isNaN(workout.speed)
-    )
+    if (typeof workout.speed != "undefined" && workout.speed != "")
       html += `
       <div class="workout__details workout__details--${workout.type}">
         <span class="workout__icon">⚡️</span>
@@ -687,10 +684,7 @@ export class App {
       </div>
     
     `;
-    if (
-      (typeof workout.pace != "undefined" && workout.pace != "") ||
-      !isNaN(workout.pace)
-    )
+    if (typeof workout.pace != "undefined" && workout.pace != "")
       html += `
         <div class="workout__details workout__details--${workout.type}">
           <span class="workout__icon">⚡️</span>
